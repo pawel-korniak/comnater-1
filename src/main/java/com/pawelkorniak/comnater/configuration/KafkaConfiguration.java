@@ -27,7 +27,7 @@ public class KafkaConfiguration {
     public ProducerFactory<String, Message> producerFactory(){
         Map<String,Object> config = new HashMap<>();
 
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9093");
+//        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"kafka");
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
@@ -44,7 +44,7 @@ public class KafkaConfiguration {
         Map<String,Object> config = new HashMap<>();
 
 
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9093");
+//        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"kafka");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
 
