@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     final MessageService messageService;
-    final KafkaTemplate<String,String> kafkaTemplate;
+    final KafkaTemplate<String,Message> kafkaTemplate;
 
     @PostMapping("send")
     public void sendMessage(@RequestParam String body,String author,String comnat){
         Message message = new Message(comnat,author,body);
          messageService.save(message);
-         kafkaTemplate.send("name-topic",message.toString());
+         kafkaTemplate.send("name-topic",message);
     }
 
     @GetMapping("{comnat}")

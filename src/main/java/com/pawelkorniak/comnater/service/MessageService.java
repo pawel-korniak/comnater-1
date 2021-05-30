@@ -21,8 +21,8 @@ public class MessageService {
 
 
     @KafkaListener(topics = "name-topic", groupId = "consumer-group-2")
-    public void listenForPerson(String message) {
-        System.out.println(message);
+    public void listenForPerson(Message message) {
+        System.out.println("Kafka : " + message);
     }
 
     @EventListener(ApplicationReadyEvent.class)
