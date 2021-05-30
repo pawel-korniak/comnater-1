@@ -1,5 +1,9 @@
 package com.pawelkorniak.comnater.service;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.pawelkorniak.comnater.data.Message;
 import com.pawelkorniak.comnater.repository.MessageRepository;
 import io.reactivex.Observable;
@@ -12,6 +16,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+import java.io.IOException;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -20,9 +26,11 @@ public class MessageService {
     final MessageRepository messageRepository;
 
 
-    @KafkaListener(topics = "name-topic", groupId = "consumer-group-2")
-    public void listenForPerson(Message message) {
-        System.out.println("Kafka : " + message);
+    @KafkaListener(topics = "name-topic", groupId = "consumer-group-2",containerFactory = "messageConcurrentKafkaListenerContainerFactory")
+    public void listenForMessages(Message message) {
+//        System.out.println("Kafka : " + message);
+        save(message);
+
     }
 
     @EventListener(ApplicationReadyEvent.class)

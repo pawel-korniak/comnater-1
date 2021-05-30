@@ -26,8 +26,8 @@ public class MessageController {
     @PostMapping("send")
     public void sendMessage(@RequestParam String body,String author,String comnat){
         Message message = new Message(comnat,author,body);
-         messageService.save(message);
-         kafkaTemplate.send("name-topic",message);
+//         messageService.save(message);
+         kafkaTemplate.send("name-topic","1:",message);
     }
 
     @GetMapping("{comnat}")
